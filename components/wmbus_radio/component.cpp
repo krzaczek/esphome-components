@@ -49,8 +49,11 @@ void Radio::loop() {
            frame->format().c_str());
 
   uint8_t packet_handled = 0;
-  for (auto &handler : this->handlers_)
+  for (auto &handler : this->handlers_) {
+    // Add log with handler info?
+    ESP_LOGD(TAG, "Passing telegram to handler %p", &handler);
     handler(&frame.value());
+  }
 
   if (frame->handlers_count())
     ESP_LOGI(TAG, "Telegram handled by %d handlers", frame->handlers_count());
