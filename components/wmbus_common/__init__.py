@@ -27,9 +27,9 @@ validate_driver = cv.All(
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(): cv.declare_id(WMBusCommon),
-        cv.Optional(CONF_DRIVERS, default=set()): cv.All(
+        cv.Optional(CONF_DRIVERS): cv.All(
             lambda x: AVAILABLE_DRIVERS if x == "all" else x,
-            {validate_driver},
+            [validate_driver],
         ),
     }
 )
